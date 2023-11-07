@@ -11,8 +11,12 @@
         <h1>RSS LOADER</h1>
         <form action="" method="post">
             <input type="text" name="url">
-            <input type="submit" value="Submit">
+            <input type="submit" value="Enter">
         </form>
-        {% if result %}<h1>{{ result }}</h1>{% endif %}
+        {% if status=='success' %}
+            <h1>Success</h1>
+        {% else %}
+            <h1>Failed</h1>
+        {% endif %}
     </body>
 </html>

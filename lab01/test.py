@@ -1,7 +1,12 @@
 import feedparser
-NewsFeed = feedparser.parse(
-    "https://genshin-feed.com/feed/rss-vi-updates.xml")
+url = 'f'
+NewsFeed = feedparser.parse(url)
 entries = NewsFeed.entries
 
-for entry in entries:
-    print(entry.title)
+if entries:
+
+    for entry in entries:
+        print(entry.title)
+
+else:
+    print("entries is empty")
