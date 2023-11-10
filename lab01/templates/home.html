@@ -14,7 +14,12 @@
             <input type="submit" value="Enter">
         </form>
         {% if status=='success' %}
-            <h1>Success</h1>
+            {% for item in entries[:5] %}
+                <a target="_blank" href="{{ item.link }}">
+                    <h2>{{ item.title }}</h2>
+                </a>
+                <p>{{ item.description }}</p>
+            {% endfor %}
         {% else %}
             <h1>Failed</h1>
         {% endif %}

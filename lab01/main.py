@@ -14,7 +14,7 @@ def home():
 def home_post():
     url = request.form['url']
     if not url:
-        url = "https://vnexpress.net/rss/tin-moi-nhat.rss"
+        return render_template('home.html', status='error')
     feed = feedparser.parse(url)
     entries = feed.entries
 
