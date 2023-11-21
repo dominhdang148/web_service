@@ -1,5 +1,7 @@
 const http = require("http");
-const server = http.createServer((req, res) => {});
-server.listen(3000, () => {
-  console.log("Server is running");
+const PORT = process.env.PORT || 5000;
+
+const server = http.createServer(async (req, res) => {});
+server.listen(PORT, () => {
+  console.log(`Server started on port: ${PORT}`);
 });
