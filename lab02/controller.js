@@ -1,6 +1,6 @@
 const data = require("./data");
 class Controller {
-  async getUsers() {
+  async getAllUsers() {
     return new Promise((resolve, _) => resolve(data));
   }
   async getUser(id) {
