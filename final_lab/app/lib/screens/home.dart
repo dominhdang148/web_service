@@ -15,6 +15,10 @@ class _HomeScreenState extends State<HomeScreen> {
   List<User> users = [];
   final _formKey = GlobalKey<FormState>();
   double currentScoreValue = 0;
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _levelController = TextEditingController();
+  final TextEditingController _scoreController = TextEditingController();
 
   Future<void> _fetchUser() async {
     debugPrint("Fetching User");
@@ -41,6 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
       debugPrint("Fetch failed");
     }
   }
+
+  Future<void> addUser() async {}
 
   @override
   void initState() {
@@ -93,18 +99,31 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          TextFormField(),
-                          TextFormField(),
-                          Slider(
-                            value: currentScoreValue,
-                            max: 9,
-                            divisions: 9,
-                            label: currentScoreValue.round().toString(),
-                            onChanged: (double value) {
-                              setState(() {
-                                currentScoreValue = value;
-                              });
-                            },
+                          TextField(
+                            decoration:
+                                const InputDecoration(hintText: "Full name"),
+                            controller: _nameController,
+                          ),
+                          TextField(
+                            decoration:
+                                const InputDecoration(hintText: "Email"),
+                            controller: _emailController,
+                          ),
+                          TextField(
+                            decoration:
+                                const InputDecoration(hintText: "VIP level"),
+                            controller: _levelController,
+                          ),
+                          TextField(
+                            decoration:
+                                const InputDecoration(hintText: "Score"),
+                            controller: _scoreController,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ElevatedButton(
+                                onPressed: () {},
+                                child: const Text("Add user")),
                           )
                         ],
                       ),
