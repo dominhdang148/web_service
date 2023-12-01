@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _fetchUser() async {
     debugPrint("Fetching User");
-    const url = "http://localhost:8000/user/";
+    const url = "http://192.168.1.9:8000/user/";
     final uri = Uri.parse(url);
     final response = await http.get(uri);
     final body = response.body;
@@ -76,59 +76,74 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () {
           showDialog(
             context: context,
-            builder: (context) {
+            builder: (BuildContext context) {
               return AlertDialog(
-                content: Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    Positioned(
-                      right: -40,
-                      top: -40,
-                      child: InkResponse(
-                        child: const CircleAvatar(
-                          backgroundColor: Colors.red,
-                          child: Icon(Icons.close),
+                content: StatefulBuilder(
+                  builder: (BuildContext context, StateSetter setState) {
+                    return Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Positioned(
+                          right: -40,
+                          top: -40,
+                          child: InkResponse(
+                            child: const CircleAvatar(
+                              backgroundColor: Colors.red,
+                              child: Icon(Icons.close),
+                            ),
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
                         ),
-                        onTap: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ),
-                    Form(
-                      key: _formKey,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          TextField(
-                            decoration:
-                                const InputDecoration(hintText: "Full name"),
-                            controller: _nameController,
+                        Form(
+                          key: _formKey,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              TextField(
+                                decoration: const InputDecoration(
+                                    hintText: "Full name"),
+                                controller: _nameController,
+                              ),
+                              TextField(
+                                decoration:
+                                    const InputDecoration(hintText: "Email"),
+                                controller: _emailController,
+                              ),
+
+                              Slider(
+                                max: 10,
+                                value: currentScoreValue,
+                                onChanged: (double value) {
+                                  setState(() => currentScoreValue = value);
+                                  debugPrint("Score value: $currentScoreValue");
+                                },
+                              ),
+
+                              // TextField(
+                              //   decoration:
+                              //       const InputDecoration(hintText: "VIP level"),
+                              //   controller: _levelController,
+                              // ),
+                              // TextField(
+                              //   decoration:
+                              //       const InputDecoration(hintText: "Score"),
+                              //   controller: _scoreController,
+                              // ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ElevatedButton(
+                                  onPressed: () {},
+                                  child: const Text("Add user"),
+                                ),
+                              )
+                            ],
                           ),
-                          TextField(
-                            decoration:
-                                const InputDecoration(hintText: "Email"),
-                            controller: _emailController,
-                          ),
-                          TextField(
-                            decoration:
-                                const InputDecoration(hintText: "VIP level"),
-                            controller: _levelController,
-                          ),
-                          TextField(
-                            decoration:
-                                const InputDecoration(hintText: "Score"),
-                            controller: _scoreController,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                                onPressed: () {},
-                                child: const Text("Add user")),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
+                        )
+                      ],
+                    );
+                  },
                 ),
               );
             },
