@@ -1,11 +1,6 @@
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+import motor.motor_asyncio
 
-
-DATABASE_URL = "mysql+mysqldb://root:@localhost:3306"
-
-db_engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(autoflush=False, bind=db_engine)
-
-Base = declarative_base()
+MONGO_DATABASE = "mongodb://localhost:27017"
+client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DATABASE)
+database = client.todo
+todo_collection = database.get_collection("todo_collection")
