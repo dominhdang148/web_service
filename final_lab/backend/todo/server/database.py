@@ -16,3 +16,10 @@ def todo_helper(todo):
         "title": todo["title"],
         "description": todo["description"]
     }
+
+
+async def retrieve_todos():
+    todos = []
+    async for todo in todo_collection.find():
+        todos.append(todo)
+    return todos
